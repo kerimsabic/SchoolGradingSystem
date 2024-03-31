@@ -8,10 +8,13 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Dashboard - SB Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Your custom styles -->
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/spapp.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body class="sb-nav-fixed">
@@ -19,7 +22,7 @@
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="#home">
             Grading System
-            <i class="fa-solid fa-user-graduate"></i>
+            <i class="fas fa-user-graduate"></i>
         </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
@@ -35,17 +38,14 @@
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#profile">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
+            <li class="nav-item " style="display: flex;align-items: center;">
+                <a class="nav-link" href="#profile">
+                    <i class="fas fa-user fa-fw"></i> Profile <!-- Link directly to the profile page -->
+                </a>
+                <a class="nav-link" href="login.html">
+                    Login <!-- Link directly to the profile page -->
+                </a>
+
             </li>
         </ul>
     </nav>
@@ -108,6 +108,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Students
                         </a>
+                        <a class="nav-link" href="#studentCourses">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            My Courses
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -118,32 +122,36 @@
         </div>
         <div id="layoutSidenav_content">
             <main id="spapp" role="main">
-                <section id="home" data-load="vtpl/home.html"></section>
+                <section id="home" data-load="home.html"></section>
                 <section id="courses" data-load="vtpl/courses.html"></section>
                 <section id="students" data-load="vtpl/students.html"></section>
                 <section id="profile" data-load="vtpl/profile.html"></section>
-               
+                <section id="studentCourses" data-load="studentCourses.html"></section>
+
             </main>
 
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-
+    <!-- Bootstrap JavaScript (including Popper.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Your custom scripts -->
+    <script src="js/jquery.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/jquery.spapp.min.js"></script>
     <script src="js/jquery.spapp.js"></script>
 
+
     <script>
+
+        // Your SPApp initialization code
         var app = $.spapp({
             defaultView: "#home",
-            templateDir: "./vtpl/",
+            templateDir: "./views/",
             pageNotFound: "error_404"
-           
-
         });
+        // Define your routes and run the app
         app.route({
             view: "home",
             load: "home.html",
@@ -157,6 +165,25 @@
             onReady: function () { }
         });
         app.route({
+            view: "courses",
+            load: "courses.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "courseDetail",
+            load: function (params) {
+                // Load the course detail page based on the course name or ID from the URL
+                return "courseDetail.html?course=" + params.course;
+            },
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        $(document).on('click', '.course-link', function () {
+            var courseName = $(this).data('course-name'); // or course ID if you prefer
+            app.navigate("courseDetail", { course: courseName });
+        });
+        app.route({
             view: "students",
             load: "students.html",
             onCreate: function () { },
@@ -165,6 +192,12 @@
         app.route({
             view: "profile",
             load: "profile.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "studentCourses",
+            load: "studentCourses.html",
             onCreate: function () { },
             onReady: function () { }
         });

@@ -1,0 +1,116 @@
+{
+    "courses": [
+      {
+        "course_id": "CSCI101",
+        "course_name": "Computer Science",
+        "course_description": "This course provides an introduction to computer science principles and programming. Topics include algorithms, data structures, programming languages, and problem-solving techniques.",
+        "instructor": {
+          "name": "Dr. John Smith",
+          "email": "john.smith@example.com"
+        },
+    
+        "credits": 3,
+        "enrolled_students": [
+          {
+            "student_id": "S1001",
+            "name": "Alice Johnson",
+            "grade": "A"
+          },
+          {
+            "student_id": "S1002",
+            "name": "Bob Williams",
+            "grade": "B+"
+          },
+          {
+            "student_id": "S1003",
+            "name": "Charlie Brown",
+            "grade": "A-"
+          }
+        ]
+      },
+      {
+        "course_id": "CSCI101",
+        "course_name": "Computer Science",
+        "course_description": "This course provides an introduction to computer science principles and programming. Topics include algorithms, data structures, programming languages, and problem-solving techniques.",
+        "instructor": {
+          "name": "Dr. John Smith",
+          "email": "john.smith@example.com"
+        },
+
+        "credits": 3,
+        "enrolled_students": [
+          {
+            "student_id": "S1001",
+            "name": "Alice Johnson",
+            "grade": "A"
+          },
+          {
+            "student_id": "S1002",
+            "name": "Bob Williams",
+            "grade": "B+"
+          },
+          {
+            "student_id": "S1003",
+            "name": "Charlie Brown",
+            "grade": "A-"
+          }
+        ]
+      },
+      {
+        "course_id": "CSCI101",
+        "course_name": "Computer Science",
+        "course_description": "This course provides an introduction to computer science principles and programming. Topics include algorithms, data structures, programming languages, and problem-solving techniques.",
+        "instructor": {
+          "name": "Dr. John Smith",
+          "email": "john.smith@example.com"
+        },
+
+        "credits": 3,
+        "enrolled_students": [
+          {
+            "student_id": "S1001",
+            "name": "Alice Johnson",
+            "grade": "A"
+          },
+          {
+            "student_id": "S1002",
+            "name": "Bob Williams",
+            "grade": "B+"
+          },
+          {
+            "student_id": "S1003",
+            "name": "Charlie Brown",
+            "grade": "A-"
+          }
+        ]
+      },
+      {
+        "course_id": "MATH201",
+        "course_name": "Calculus I",
+        "course_description": "This course covers the fundamentals of calculus, including limits, derivatives, and integrals. Applications to real-world problems are emphasized.",
+        "instructor": {
+          "name": "Dr. Emily Davis",
+          "email": "emily.davis@example.com"
+        },
+        "credits": 4,
+        "enrolled_students": [
+          {
+            "student_id": "S1004",
+            "name": "David Lee",
+            "grade": "A-"
+          },
+          {
+            "student_id": "S1005",
+            "name": "Emma Garcia",
+            "grade": "B"
+          },
+          {
+            "student_id": "S1006",
+            "name": "Fiona Martinez",
+            "grade": "B+"
+          }
+        ]
+      }
+    ]
+  }
+  

@@ -1,0 +1,30 @@
+[
+    {
+      "course_name": "Math",
+      "course_code": "IT 313",
+      "grades": [
+        { "exam": "Quiz", "grade": 10 },
+        { "exam": "Midterm", "grade": 32 },
+        { "exam": "Final", "grade": 40 }
+      ]
+    },
+    {
+      "course_name": "Science",
+      "course_code": "IT 313",
+      "grades": [
+        { "exam": "Quiz", "grade": 10 },
+        { "exam": "Midterm", "grade": 23 },
+        { "exam": "Final", "grade": 40 }
+      ]
+    },
+    {
+      "course_name": "Programming",
+      "course_code": "IT 313",
+      "grades": [
+        { "exam": "Quiz", "grade": 10 },
+        { "exam": "Midterm", "grade": 23 },
+        { "exam": "Final", "grade": 40 }
+      ]
+    }
+  ]
+  

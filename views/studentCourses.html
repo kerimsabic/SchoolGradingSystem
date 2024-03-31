@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables - SB Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <main>
+        <div class="container-fluid px-4">
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Courses</li>
+            </ol>
+
+            <div class="row" id="coursesTable"></div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.getJSON('data/studentCourses.json', function (data) {
+                var coursesTable = $('#coursesTable');
+                $.each(data, function (index, course) {
+                    var totalGrade = 0; // Initialize total grade
+                    var card = $('<div>').addClass('col-xl-12')
+                        .append($('<div>').addClass('card bg-primary text-white mb-4')
+                            .append($('<div>').addClass('d-flex')
+                                .append($('<div>').addClass('card-body').text(course.course_name))
+                                .append($('<div>').addClass('card-body text-end').text(course.course_code)))
+                            .append($('<div>').addClass('card-footer d-flex align-items-center justify-content-between bg-light')
+                                .append($('<table>').addClass('table table-striped table-hover')
+                                    .append($('<tbody>').addClass('justify-content-between')))));
+                    $.each(course.grades, function (index, grade) {
+                        $('tbody', card).append($('<tr>')
+                            .append($('<td>').text(grade.exam))
+                            .append($('<th>').addClass('text-end').text(grade.grade)));
+                        totalGrade += parseInt(grade.grade); // Accumulate grade for total calculation
+                    });
+                    // Append the total row
+                    $('tbody', card).append($('<tr>')
+                        .append($('<th>').text('TOTAL'))
+                        .append($('<th>').addClass('text-end').text(totalGrade)));
+                    coursesTable.append(card);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
