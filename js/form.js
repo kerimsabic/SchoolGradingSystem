@@ -33,12 +33,19 @@ $("#tutorial-form").validate({
     },
   },
  submitHandler: function (form, event) {
-    apiFormHandler(form, event);
+  event.preventDefault();
+  blockUi("#tutorial-form"); 
+  let data = serializeForm(form);
+  users.push(data);
+  $("#tutorial-form")[0].reset();
+  console.log(users); 
+  unblockUi("#tutorial-form"); 
+  window.location.href = "#login";
   },
 });
 
 function objectFormHandler(form, event) {
-  // TODO check whether the form action is create a new user or update a existing user
+
 
   event.preventDefault();
   blockUi("#tutorial-form");

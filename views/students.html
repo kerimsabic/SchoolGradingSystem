@@ -8,10 +8,11 @@
     <!-- Include DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <!-- Include Responsive extension CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
-    <!-- Custom CSS for margin -->
+
+
     <style>
         .table-container {
             margin-left: 20px;
@@ -32,8 +33,9 @@
         <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#editFormModal">Add
             Student</button>
 
-            
-        <table id="studentTable" class="table table-striped dataTable no-footer" style="width:90%; padding-bottom: 100px;" aria-describedby="studentTable_info">
+
+        <table id="studentTable" class="table table-striped dataTable no-footer"
+            style="width:90%; padding-bottom: 100px;" aria-describedby="studentTable_info">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -42,7 +44,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody >
+            <tbody>
                 <!-- Table rows will be dynamically populated here -->
             </tbody>
         </table>
@@ -70,7 +72,7 @@
                             <label for="editEmail" class="form-label">Email</label>
                             <input type="email" class="form-control" id="editEmail" placeholder="Enter email">
                         </div>
-                        <!-- Add more fields as needed -->
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -82,22 +84,54 @@
     </div>
 
 
-    <!-- Include jQuery -->
+    <div class="modal fade" id="gradeFormModal" tabindex="-1" aria-labelledby="gradeFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gradeFormModalLabel">Enter Grade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="gradeForm">
+                        <div class="mb-3">
+                            <label for="grade" class="form-label">Exam Title</label>
+                            <input type="text" class="form-control" id="grade" placeholder="Enter exam title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="grade" class="form-label">Grade</label>
+                            <input type="number" class="form-control" min="1" max="50" id="grade"
+                                placeholder="Enter grade">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveGradeBtn">Save Grade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Include DataTables JS -->
+
+
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <!-- Include Responsive extension JS -->
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            // AJAX call to fetch JSON data
             $.ajax({
                 url: 'http://localhost/SchoolGradingSystem/data/students.json',
                 dataType: 'json',
                 success: function (data) {
-                    // Populate table with fetched data and add custom buttons
+
                     $('#studentTable').DataTable({
                         data: data,
                         columns: [
@@ -115,20 +149,26 @@
                 }
             });
 
-            // Event listener for edit button
+
             $('#studentTable').on('click', '.btn-edit', function () {
                 var id = $(this).data('id');
-                // Show the edit form
                 $('#editFormModal').modal('show');
-                // Handle edit action here
                 console.log('Edit clicked for ID: ' + id);
             });
 
-            // Event listener for grade button
+
+
             $('#studentTable').on('click', '.btn-grade', function () {
                 var id = $(this).data('id');
-                // Handle grade action here
+
+                $('#gradeFormModal').modal('show');
                 console.log('Grade clicked for ID: ' + id);
+            });
+
+            $('#saveGradeBtn').on('click', function () {
+                var grade = $('#grade').val();
+                console.log('Grade saved:', grade);
+                $('#gradeFormModal').modal('hide');
             });
         });
     </script>

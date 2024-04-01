@@ -10,20 +10,20 @@
     },
     {
       "course_name": "Science",
-      "course_code": "IT 313",
+      "course_code": "IT 122",
       "grades": [
-        { "exam": "Quiz", "grade": 10 },
+        { "exam": "Quiz", "grade": 4 },
         { "exam": "Midterm", "grade": 23 },
-        { "exam": "Final", "grade": 40 }
+        { "exam": "Final", "grade": 25 }
       ]
     },
     {
       "course_name": "Programming",
-      "course_code": "IT 313",
+      "course_code": "IT 312",
       "grades": [
-        { "exam": "Quiz", "grade": 10 },
+        { "exam": "Quiz", "grade": 7 },
         { "exam": "Midterm", "grade": 23 },
-        { "exam": "Final", "grade": 40 }
+        { "exam": "Final", "grade": 33 }
       ]
     }
   ]
