@@ -1,15 +1,15 @@
 $(document).ready(function getCourses() {
-    // Fetch courses from JSON file
+
     $.ajax({
-        url: 'data/courses.json', // Specify the path to your JSON file
+        url: 'data/courses.json',
         type: 'GET',
         dataType: 'json',
-        success: function(response) {
-            // Handle successful response
+        success: function (response) {
+
             if (response && response.courses) {
                 $("#courseList").empty();
-                // Iterate over courses and create course cards
-                $.each(response.courses, function(index, course) {
+
+                $.each(response.courses, function (index, course) {
                     var courseCard = `
                     <div class="col-xl-6 col-md-6 clickableCard" data-course-id="${course.course_id}">
                         <div class="card bg-primary text-white mb-4 position-relative">
@@ -27,48 +27,70 @@ $(document).ready(function getCourses() {
                     $('#courseList').append(courseCard);
                 });
 
-                // Click event handler for course cards
-                $(".clickableCard").click(function(){
+
+                $(".clickableCard").click(function () {
                     var courseId = $(this).data("course-id");
                     console.log("Clicked course ID:", courseId);
-                    // Fetch course details using courseId and display in modal
-                    getCourseById(courseId, function(course) {
+
+                    getCourseById(courseId, function (course) {
                         console.log("Fetched course details:", course.course_name);
-                        // Update modal content
-                        $("#courseModalTitle").text(course.course_name);
-                        $("#courseModalContent").html("<strong>Course ID:</strong> " + course.course_id + "<br>" +
-                                                      "<strong>Course Name:</strong> " + course.course_name + "<br>" +
-                                                      "<strong>Course Description:</strong> " + course.credits + "<br>"+
-                                                      "<strong>Course Description:</strong> " + course.course_description);
-                        // Open modal
-                        $('#courseModal').modal('show');
+
+                        getAllStudents(function (students) {
+                            // Convert student data to array of arrays
+                            var studentData = students.map(function (student) {
+                                return [student.id, student.Name, student.Age, student.Email];
+                            });
+                            // Initialize DataTable with student data
+                            $('#courseModalTitle').text(course.course_name);
+                            $('#courseModalContent').html("<strong>Course ID:</strong> " + course.course_id + "<br>" +
+                                "<strong>Course Description:</strong> " + course.credits + "<br>" +
+                                "<strong>Course Description:</strong> " + course.course_description + "<br><br>" +
+                                '<table id="studentTable" class="display"></table>');
+                            $('#studentTable').DataTable({
+                                data: studentData,
+                                columns: [
+                                    { title: 'ID', width: '10%' },
+                                    { title: 'Name', width: '20%' },
+                                    { title: 'Age', width: '10%' },
+                                    { title: 'Email', width: '40%' },
+                                    {
+                                        title: "Action", width: '20%',
+                                        data: null,
+                                        render: function (data, type, row) {
+                                            return '<button class="btn-edit" data-id="' + row.id + '">Edit</button> <button class="btn-grade" data-id="' + row.id + '">Grade</button>';
+                                        }
+                                    }
+                                ],
+                                scrollX: true,
+                                scrollCollapse: true
+
+                            });
+
+                            $('#courseModal').modal('show');
+                        });
                     });
                 });
             } else {
                 console.error('No courses found.');
             }
         },
-        error: function(error) {
+        error: function (error) {
             console.error('Error fetching courses:', error);
         }
     });
 
-    // Function to fetch course details by ID
+
     function getCourseById(courseId, callback) {
-        // Fetch courses from JSON file
         $.ajax({
-            url: 'data/courses.json', // Specify the path to your JSON file
+            url: 'data/courses.json',
             type: 'GET',
             dataType: 'json',
-            success: function(response) {
-                // Check if courses data and courseId are provided
+            success: function (response) {
                 if (response && response.courses && courseId) {
-                    // Find the course by its ID
-                    var course = response.courses.find(function(course) {
+                    var course = response.courses.find(function (course) {
                         return course.course_id === courseId;
                     });
 
-                    // Execute the callback function with the found course as parameter
                     if (course) {
                         callback(course);
                     } else {
@@ -78,11 +100,28 @@ $(document).ready(function getCourses() {
                     console.error('Error: Courses data or course ID not provided.');
                 }
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Error fetching courses:', error);
             }
         });
     }
+
+
+    function getAllStudents(callback) {
+        $.ajax({
+            url: 'data/students.json',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response) {
+                    callback(response);
+                } else {
+                    console.error('No students found.');
+                }
+            },
+            error: function (error) {
+                console.error('Error fetching students:', error);
+            }
+        });
+    }
 });
-
-
