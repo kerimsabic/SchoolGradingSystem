@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Your custom styles -->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/spapp.css" rel="stylesheet" />
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="#home">
+            Grading System
+            <i class="fas fa-user-graduate"></i>
+        </a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item " style="display: flex;align-items: center;">
+                <a class="nav-link" href="#profile">
+                    <i class="fas fa-user fa-fw"></i> Profile <!-- Link directly to the profile page -->
+                </a>
+                <a class="nav-link" href="#login">
+                    Login <!-- Link directly to the profile page -->
+                </a>
+
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="#home">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                       
+                        
+                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <a class="nav-link" href="#courses">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Courses
+                        </a>
+                        <a class="nav-link" href="#students">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Students
+                        </a>
+                        <a class="nav-link" href="#studentCourses">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            My Courses
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main id="spapp" role="main">
+                <section id="home" data-load="home.html"></section>
+                <section id="courses" data-load="courses.html"></section>
+                <section id="students" data-load="students.html"></section>
+                <section id="profile" data-load="profile.html"></section>
+                <section id="studentCourses" data-load="studentCourses.html"></section>
+                <section id="courseDetails" data-load="courseDetails.html"></section>
+                <section id="login" data-load="login.html"></section>
+                <section id="register" data-load="register.html"></section>
+
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript (including Popper.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Your custom scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/jquery.spapp.min.js"></script>
+    <script src="js/jquery.spapp.js"></script>
+
+
+    <script>
+
+        // Your SPApp initialization code
+        var app = $.spapp({
+            defaultView: "#home",
+            templateDir: "./views/",
+            pageNotFound: "error_404"
+        });
+        // Define your routes and run the app
+        app.route({
+            view: "home",
+            load: "home.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "courses",
+            load: "courses.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "courses",
+            load: "courses.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "courseDetails",
+            load:"courseDetails.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "students",
+            load: "students.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "profile",
+            load: "profile.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "studentCourses",
+            load: "studentCourses.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "login",
+            load: "login.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.route({
+            view: "register",
+            load: "register.html",
+            onCreate: function () { },
+            onReady: function () { }
+        });
+        app.run();
+    </script>
+</body>
+
+</html>
