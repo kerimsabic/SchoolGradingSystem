@@ -30,8 +30,9 @@
 
     <div class="container-fluid px-4" style="padding-bottom: 500px;">
         <h1 class="text-center">Student List</h1>
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#editFormModal">Add
-            Student</button>
+        <button type="button" class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#studentModal">
+            + Add Student
+        </button>
 
 
         <table id="studentTable" class="table table-striped dataTable no-footer"
@@ -51,33 +52,45 @@
     </div>
 
     <!-- Modal HTML -->
-    <div class="modal fade" id="editFormModal" tabindex="-1" aria-labelledby="editFormModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editFormModalLabel">Edit Student</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editForm">
+                    <form id="studentForm">
                         <div class="mb-3">
-                            <label for="editName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="editName" placeholder="Enter name">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                                name="firstName" required>
+                            <div class="invalid-feedback">Please enter your first name.</div>
                         </div>
                         <div class="mb-3">
-                            <label for="editAge" class="form-label">Age</label>
-                            <input type="text" class="form-control" id="editAge" placeholder="Enter age">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                                name="lastName" required>
+                            <div class="invalid-feedback">Please enter your last name.</div>
                         </div>
                         <div class="mb-3">
-                            <label for="editEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" placeholder="Enter email">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email"
+                                required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
                         </div>
-
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password"
+                                name="password" required>
+                            <div class="invalid-feedback">Please enter your password.</div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveChangesBtn">Save</button>
+                    <button type="button" class="btn btn-primary" id="saveChangesBtnStudnet"
+                        data-bs-dismiss="modal">Save changes</button>
                 </div>
             </div>
         </div>
@@ -114,6 +127,54 @@
     </div>
 
 
+    <div class="modal fade" id="studentModaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="studentFormedit">
+                      
+                        <input type="hidden" id="id" name="id">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                                name="firstName" required>
+                            <div class="invalid-feedback">Please enter your first name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name"
+                                name="lastName" required>
+                            <div class="invalid-feedback">Please enter your last name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email"
+                                required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password"
+                                name="password" required>
+                            <div class="invalid-feedback">Please enter your password.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- Change button text to reflect the action of updating a student -->
+                    <button type="button" class="btn btn-primary" id="saveChangesBtnStudentEdit" data-bs-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -125,19 +186,21 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-    <script>
+
+    <script src="js/student.js"></script>
+    <!--   <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost/SchoolGradingSystem/data/students.json',
+                url: 'http://localhost/SchoolGradingSystem/backend/api/students',
                 dataType: 'json',
                 success: function (data) {
 
                     $('#studentTable').DataTable({
                         data: data,
                         columns: [
-                            { data: 'Name' },
-                            { data: 'Age' },
-                            { data: 'Email' },
+                            { data: 'firstName' },
+                            { data: 'lastName' },
+                            { data: 'email' },
                             {
                                 data: null,
                                 render: function (data, type, row) {
@@ -171,7 +234,7 @@
                 $('#gradeFormModal').modal('hide');
             });
         });
-    </script>
+    </script>    -->
 
 </body>
 
